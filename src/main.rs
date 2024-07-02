@@ -7,6 +7,7 @@ use simplelog::{ColorChoice, CombinedLogger, Config, TermLogger, TerminalMode};
 use std::fs;
 use std::sync::mpsc;
 use std::thread::JoinHandle;
+use cmd_lib::run_cmd;
 
 mod fireplan;
 mod imap;
@@ -40,6 +41,7 @@ pub struct Configuration {
     regex_koordinaten: String,
     regex_zusatzinfo: String,
     regex_objektname: String,
+    simple_trigger: Option<String>,
     rics: Vec<Ric>,
     standorte: Vec<Standort>,
 }
@@ -129,6 +131,13 @@ fn main() {
                     data.rics = alarmier_rics;
                     info!("Submitting to Fireplan Standort Verwaltung");
                     fireplan::submit("Verwaltung".to_string(), configuration.fireplan_api_key.clone(), data);
+                    if let Some(script_path) = configuration.simple_trigger.clone() {
+                        info!("Executing simple trigger");
+                        match run_cmd!($script_path) {
+                            Ok(()) => info!("Execute ok"),
+                            Err(e) => error!("Failure: {e}")
+                        }
+                    }
                 }
             }
             Err(e) => {

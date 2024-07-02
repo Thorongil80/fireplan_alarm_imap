@@ -16,6 +16,8 @@ regex_objektname = 'Objekt\s*:\s*(.*)'
 # this is evaluated on the complete email text, check multi-line mode in rust crate regex for syntax
 regex_zusatzinfo = '(?mRU)---------------------------\s*BEMERKUNG\s*---------------------------(.*)--------------------'
 
+simple_trigger = "/script/foo"
+
 # RIC list matching Text to RIC and SUBRIC
 
 # resolve text against RICs, searched line by line with longest matching text
