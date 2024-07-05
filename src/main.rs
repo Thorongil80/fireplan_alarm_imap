@@ -20,6 +20,7 @@ pub struct Standort {
     imap_port: u16,
     imap_user: String,
     imap_password: String,
+    additional_rics: Option<Vec<Ric>>
 }
 
 #[derive(Clone, Serialize, Deserialize, Eq, Hash, PartialEq, Debug)]

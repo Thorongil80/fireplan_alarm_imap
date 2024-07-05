@@ -33,3 +33,6 @@ imap_server = "imap.blabla.xx"
 imap_port = 993
 imap_user = "alarmmail@ff-flammhausen.de"
 imap_password = "supergeheim"
+# it is possible to add rics for every alarm of a standort, e.g. dummy ones, may be omitted
+additional_rics = [ { text = "Abcd", ric = "123456", subric = "B" },
+         { text = "Xyz",  ric = "654321", subric = "B" }  ]

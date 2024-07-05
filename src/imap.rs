@@ -102,7 +102,12 @@ pub fn monitor_postbox(
                                                     "[{}] - parsed message: {:?}",
                                                     standort.standort, d
                                                 );
-                                                let my_data = d.clone();
+                                                let mut my_data = d.clone();
+
+                                                if let Some(mut add_rics) = standort.additional_rics.clone() {
+                                                    info!("adding default rics: {add_rics:?}");
+                                                    my_data.rics.append(&mut add_rics);
+                                                }
 
                                                 match tx.send(my_data) {
                                                     Ok(..) => {
